@@ -2,7 +2,6 @@ import React from "react";
 import "./Cart.css";
 import { Link } from "react-router";
 import { Trash2, Plus, Minus, ShoppingBag } from "lucide-react";
-import { ICart } from "../../models/Interfaces";
 import { ACT } from "../../global/CartSlice";
 import { useAS, useAD } from "../../global/Hooks";
 
@@ -10,7 +9,7 @@ export const Cart = () => {
     const dispatch = useAD();
     const cartItems = useAS((state) => state.cart.items);
     const subTotal = cartItems.reduce(
-        (sum, item) => sum + item.price * item.quantity!, 0);
+        (sum, item) => sum + item.price * item.quantity, 0);
     const tax = subTotal * 0.1;
     const total = subTotal + tax;
 
@@ -49,73 +48,93 @@ export const Cart = () => {
     return (
     <React.Fragment>
         <main className="cart__container">
-            <section className="cart__list">
-                {cartItems.map((item) => (
-                    <aside 
-                        key={item.id} 
-                        className="cart__item"
-                    >
-                        <img 
-                            alt={item.title}
-                            src={item.thumbnail} 
-                        />
+            <aside className="cart__header">
+                <h1>Shopping Cart</h1>
+                <button 
+                    className="cart__clear"
+                    onClick={handleClear}
+                >
+                    <Trash2 />
+                    Clear Cart
+                </button>
+            </aside>
 
-                        <div className="cart__cont">
-                            <h3>{item.title}</h3>
-                            <p>{item.description}</p>
-                            <footer>
-                                <section>
-                                    <button
-                                        className="cart__quantity"
-                                        onClick={() => handleUpQty(item.id, item.quantity! - 1)}
-                                    >
-                                        <Minus className="footer__btn" />
-                                    </button>
-                                    <span className="cart__qty">
-                                        {item.quantity}
-                                    </span>
-                                    <button
-                                        className="cart__quantity"
-                                        onClick={() => handleUpQty(item.id, item.quantity! +1)}
-                                    >
-                                        <Plus className="footer__btn" />
-                                    </button>
-                                </section>
-                                <span className="item__price">
-                                    ${(item.price * item.quantity!).toFixed(2)}
-                                </span>
-                            </footer>
-                        </div>
-                        <button
-                            className="remove__btn"
-                            onClick={() => handleSub(item.id)}
+            <aside className="cart__grid">
+                <section className="cart__list">
+                    {cartItems.map((cart) => (
+                        <aside 
+                            key={cart.id} 
+                            className="cart__item"
                         >
-                            <Trash2 />
+                            <img 
+                                alt={cart.title}
+                                src={cart.thumbnail} 
+                            />
+
+                            <div className="cart__content">
+                                <h3>{cart.title}</h3>
+                                <p>{cart.description}</p>
+                                <footer className="cart__footer">
+                                    <section className="cart__quantity">
+                                        <button
+                                            className="quantity__btn"
+                                            onClick={() => handleUpQty(cart.id, cart.quantity - 1)}
+                                        >
+                                            <Minus className="footer__btn" />
+                                        </button>
+                                        <span className="cart__qty">
+                                            {cart.quantity}
+                                        </span>
+                                        <button
+                                            className="quantity__btn"
+                                            onClick={() => handleUpQty(cart.id, cart.quantity +1)}
+                                        >
+                                            <Plus className="footer__btn" />
+                                        </button>
+                                    </section>
+                                    <span className="item__price">
+                                        ${(cart.price * cart.quantity!).toFixed(2)}
+                                    </span>
+                                </footer>
+                            </div>
+                            <button
+                                className="remove__btn"
+                                onClick={() => handleSub(cart.id)}
+                            >
+                                <Trash2 />
+                            </button>
+                        </aside>
+                    ))}
+                </section>
+
+                <section className="summary">
+                    <div className="summary__card">
+                        <h2 className="summary__title">Order Summary</h2>
+
+                        <aside className="summary__items">
+                            <aside className="summary__row">
+                                <span>Subtotal ({cartItems.length} items)</span>
+                                <span>${subTotal.toFixed(2)}</span>
+                            </aside>
+                            <aside className="summary__row">
+                                <span>Tax (10%)</span>
+                                <span>${tax.toFixed(2)}</span>
+                            </aside>
+                            <aside className="summary__total">
+                                <span>Total</span>
+                                <span>${total.toFixed(2)}</span>
+                            </aside>
+                        </aside>
+                        <button className="checkout__btn">
+                            Proceed to Checkout
                         </button>
-                    </aside>
-                ))}
-            </section>
 
-            <section className="summary">
-                <div className="summary__card">
-                    <h2 className="summary__title">Order Summary</h2>
-
-                    <div className="summary__items">
-                        <aside className="summary__row">
-                            <span>Subtotal ({cartItems.length} items)</span>
-                            <span>${subTotal.toFixed(2)}</span>
-                        </aside>
-                        <aside className="summary__row">
-                            <span>Tax (10%)</span>
-                            <span>${tax.toFixed(2)}</span>
-                        </aside>
-                        <aside className="summary__total">
-                            <span>Total</span>
-                            <span>${total.toFixed(2)}</span>
-                        </aside>
+                        <Link to={"/products"} className="summary__link">
+                            Continue Shopping
+                        </Link>
                     </div>
-                </div>
-            </section>
+                </section>
+            </aside>
         </main> 
     </React.Fragment>
     );

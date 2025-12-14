@@ -1,10 +1,16 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
+import type { PayloadAction } from "@reduxjs/toolkit";
 import { ICart, ICartState } from "../models/Interfaces";
 
 const initialState: ICartState = {
     items: localStorage.getItem("shopCart") ? 
         JSON.parse(localStorage.getItem("shopCart")
     || "") : []
+};
+
+export interface NUM { 
+    id: number, 
+    quantity: number 
 };
 
 const CartSlice = createSlice({
@@ -15,7 +21,7 @@ const CartSlice = createSlice({
             const indexItem = state.items.find(
                 (item) => item.id === action.payload.id);
             if (indexItem) {
-                indexItem.quantity! + 1;
+                indexItem.quantity + 1;
             } else {
                 state.items.push({
                     ...action.payload,
@@ -31,14 +37,14 @@ const CartSlice = createSlice({
             localStorage.setItem("shopCart", 
                 JSON.stringify(state.items));
         },
-        upQty: (state, action: PayloadAction<{ 
-            id: number, quantity: number 
-        }>) => {
+        upQty: (state, action: PayloadAction<NUM>) => {
             const item = state.items.find(
                 (item) => item.id === action.payload.id);
             if (item) {
                 item.quantity = action.payload.quantity;
             };
+            localStorage.setItem("shopCart", 
+                JSON.stringify(state.items));
         },
         clear: (state) => {
             state.items = [],

@@ -26,7 +26,7 @@ export interface IProd {
 };
 
 export interface ICart extends IProd {
-    quantity?: number
+    quantity: number
 };
 
 export interface ICartState {

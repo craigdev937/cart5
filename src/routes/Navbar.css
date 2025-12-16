@@ -19,17 +19,18 @@
     font-size: 1.5rem;
     font-weight: 700;
     display: grid;
-    grid-template-columns: repeat(4, auto);
+    grid-template-columns: repeat(3, auto);
     grid-gap: 10px;
     list-style: none;
     text-align: center;
     width: 70vw;
-    margin-right: 2rem;
+    margin-right: 1dvi;
 }
 
 .nav__item {
     display: flex;
     align-items: center;
+    justify-content: flex-end;
     height: 90px;
 }
 

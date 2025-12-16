@@ -7,7 +7,7 @@ export const Navbar = () => {
     const [open, setOpen] = React.useState(false);
     const cartItemsCount = useAS(
         (state) => state.cart.items.reduce(
-            (sum, item) => sum + item.quantity, 0));
+            (sum, item) => sum + item.quantity!, 0));
 
     const handleClick = () => setOpen(!open);
     const closeMenu = () => setOpen(false);

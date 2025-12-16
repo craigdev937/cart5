@@ -9,7 +9,7 @@ export const Cart = () => {
     const dispatch = useAD();
     const cartItems = useAS((state) => state.cart.items);
     const subTotal = cartItems.reduce(
-        (sum, item) => sum + item.price * item.quantity, 0);
+        (sum, item) => sum + item.price * item.quantity!, 0);
     const tax = subTotal * 0.1;
     const total = subTotal + tax;
 
@@ -77,7 +77,7 @@ export const Cart = () => {
                                 <section className="cart__quantity">
                                     <button
                                         className="quantity__btn"
-                                        onClick={() => handleUpQty(cart.id, cart.quantity - 1)}
+                                        onClick={() => handleUpQty(cart.id, cart.quantity! - 1)}
                                     >
                                         <Minus className="footer__btn" />
                                     </button>
@@ -86,7 +86,7 @@ export const Cart = () => {
                                     </span>
                                     <button
                                         className="quantity__btn"
-                                        onClick={() => handleUpQty(cart.id, cart.quantity +1)}
+                                        onClick={() => handleUpQty(cart.id, cart.quantity! +1)}
                                     >
                                         <Plus className="footer__btn" />
                                     </button>

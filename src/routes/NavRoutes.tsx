@@ -1,6 +1,6 @@
 import React from "react";
 import { createBrowserRouter, 
-    RouterProvider } from "react-router";
+    RouterProvider, matchPath } from "react-router";
 import { NotFound } from "../components/NotFound";
 import { Navbar } from "./Navbar";
 import { Home } from "../pages/home/Home";

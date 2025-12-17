@@ -42,18 +42,10 @@ export const Navbar = () => {
                     </button>
 
                     {/* SIDEBAR AND MEDIA QUERIES */}
-                    <ul className={open ? 
+                    <menu className={open ? 
                         "nav__menu active" : 
                         "nav__menu"
                     }>
-                        {/* <li className="nav__item">
-                            <Link to={"/"}
-                                className="nav__links"
-                                onClick={closeMenu}
-                            >
-                                Home
-                            </Link>
-                        </li> */}
                         <li className="nav__item">
                             <Link to={"/products"}
                                 className="nav__links"
@@ -78,7 +70,7 @@ export const Navbar = () => {
                                 Cart
                             </Link>
                         </li>
-                    </ul>
+                    </menu>
                 </nav>
             </header>
             <Outlet />

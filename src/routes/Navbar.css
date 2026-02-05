@@ -1,7 +1,12 @@
+header.navbar {
+    container-type: inline-size;
+    container-name: navbar;
+}
+
 .nav {
     display: flex;
     height: 90px;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     font-size: 1.2rem;
     background-color: var(--blue);
@@ -20,11 +25,9 @@
     font-weight: 700;
     display: grid;
     grid-template-columns: repeat(3, auto);
-    grid-gap: 10px;
+    grid-gap: 1rem;
     list-style: none;
-    text-align: center;
-    width: 70vw;
-    margin-right: 1dvi;
+    margin-right: 2rem;
 }
 
 .nav__item {
@@ -110,14 +113,14 @@
     transform: translateY(-13px) rotate(90deg);
 }
 
-/* SIDEBAR AND MEDIA QUERIES */
-@media (min-width: 710px) {
+/* SIDEBAR AND CONTAINER QUERIES */
+@container navbar (min-width: 710px) {
     .nav__button {
         display: none;
     }
 }
 
-@media (max-width: 710px) {
+@container navbar (max-width: 710px) {
     .nav {
         justify-content: flex-end;
     }

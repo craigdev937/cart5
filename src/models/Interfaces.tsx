@@ -1,7 +1,7 @@
 export interface ICat {
     slug: string,
     name: string,
-    url: string
+    url: string,
 };
 
 export interface SCat {

@@ -8,8 +8,7 @@ import { Spinner } from "../../components/spin/Spinner";
 export const Categories = () => {
     const { SG } = useParams();
     const slug = SG !== undefined ? String(SG) : "";
-    const { error, isLoading, data } = DAPI.useCatQuery();
-    console.log(data);
+    const { error, isLoading, data: categories } = DAPI.useCatQuery();
 
     if (error) {
         if ("status" in error) {
@@ -31,10 +30,10 @@ export const Categories = () => {
                 <main className="cat__container">
                     <h1 className="cat__title">Categories Page</h1>
                     <section className="cat__grid">
-                        {data && data.map((cat) => (
+                        {categories?.map((cat) => (
                             <Link
                                 key={cat.slug}
-                                to={`/products?category/${cat.slug}`}
+                                to={`/products?category=${cat.slug}`}
                             >
                                 <aside className="cat__content">
                                     <div className="icon__wrapper">

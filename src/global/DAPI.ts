@@ -3,17 +3,22 @@ import { createApi,
 import { IData, ICat, IProd, SCat } from "../models/Interfaces";
 const URL = "https://dummyjson.com";
 
+type CAT = {
+    limit?: number,
+    skip?: number,
+    category?: string
+};
+
 export const DAPI = createApi({
     reducerPath: "DAPI",
     tagTypes: ["Products", "Categories"],
     baseQuery: fetchBaseQuery({ baseUrl: `${URL}` }),
     endpoints: (builder) => ({
-        pro: builder.query<IData, void>({
-            query: () => ({
-                url: "/products?limit=500",
-                method: "GET",
-            }),
-            providesTags: ["Products"]
+        pro: builder.query<IData, CAT>({
+            query: ({ limit = 30, skip = 0, category }) => 
+                category ? `/products/category/${
+                    category}?limit=${limit}&skip=${skip}` : 
+                    `/products?limit=${limit}&skip=${skip}`
         }),
         product: builder.query<IProd, number>({
             query: (id) => ({

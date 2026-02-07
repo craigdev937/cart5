@@ -1,6 +1,6 @@
 import React from "react";
 import "./Products.css";
-import { Link } from "react-router";
+import { Link, useSearchParams } from "react-router";
 import { DAPI } from "../../global/DAPI";
 import { ACT } from "../../global/CartSlice";
 import { useAD } from "../../global/Hooks";
@@ -8,7 +8,11 @@ import { IProd } from "../../models/Interfaces";
 import { Spinner } from "../../components/spin/Spinner";
 
 export const Products = () => {
-    const { error, isLoading, data } = DAPI.useProQuery();
+    const [searchParams] = useSearchParams();
+    const category = searchParams.get("category") || undefined;
+    const { error, isLoading, data } = DAPI.useProQuery({
+        limit: 30, skip: 0, category
+    });
     const DAT = data?.products;
     const dispatch = useAD();
 
@@ -33,7 +37,15 @@ export const Products = () => {
             <Spinner />
         ) : (
             <main className="prod__container">
-                <h1 className="prod__info">Products</h1>
+                <div className="prod__header">
+                    <h1 className="prod__title">
+                        {category ? `${
+                            category.charAt(0).toUpperCase() + 
+                            category.slice(1)} Products` 
+                            : "All Products"}
+                    </h1>
+                    <p className="prod__sub">{data?.total} products available</p>
+                </div>
                 <section className="prod__grid">
                     {DAT && DAT.map((prod) => (
                         <aside key={prod.id} className="prod__card">

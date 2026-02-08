@@ -1,13 +1,11 @@
 import React from "react";
 import "./Categories.css";
-import { Link, useParams } from "react-router";
+import { Link } from "react-router";
 import { DAPI } from "../../global/DAPI";
 import { Package } from "lucide-react";
 import { Spinner } from "../../components/spin/Spinner";
 
 export const Categories = () => {
-    const { SG } = useParams();
-    const slug = SG !== undefined ? String(SG) : "";
     const { error, isLoading, data: categories } = DAPI.useCatQuery();
 
     if (error) {
@@ -28,20 +26,20 @@ export const Categories = () => {
                 <Spinner />
             ) : (
                 <main className="cat__container">
-                    <h1 className="cat__title">Categories Page</h1>
+                    <h1 className="cat__title">Shop by Category</h1>
                     <section className="cat__grid">
                         {categories?.map((cat) => (
                             <Link
+                                className="cat__card"
                                 key={cat.slug}
                                 to={`/products?category=${cat.slug}`}
                             >
                                 <aside className="cat__content">
-                                    <div className="icon__wrapper">
+                                    <div className="cat__icon">
                                         <Package />
                                     </div>
                                     <h2 className="cat__name">{cat.name}</h2>
                                 </aside>
-                                <div className="cat__overlay"></div>
                             </Link>
                         ))}
                     </section>

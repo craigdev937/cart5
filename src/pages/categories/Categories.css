@@ -1,0 +1,68 @@
+.cat__container {
+    display: grid;
+    padding: clamp(1rem, 3vw, 2rem);
+    gap: clamp(1.5rem, 4vw, 3rem);
+    max-width: 1500px;
+    margin-inline: auto;
+}
+
+.cat__title {
+    font-size: clamp(1.8rem, 4vw, 3rem);
+    text-align: center;
+    font-weight: 700;
+}
+
+.cat__grid {
+    display: grid;
+    grid-template-columns: repeat(
+        auto-fill, 
+        minmax(12.5rem, 1fr)
+    );
+    gap: clamp(1rem, 2vw, 2rem);
+}
+
+.cat__card {
+    background: var(--card-bg);
+    padding: clamp(1rem, 2vw, 1.5rem);
+    border-radius: 0.75rem;
+    text-decoration: none;
+    color: inherit;
+    background: var(--white);
+    display: grid;
+    grid-template-rows: subgrid;
+    grid-row: span 2;
+    border: 1px solid hsl(0 0% 0% / 0.1);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.cat__card:is(:hover, :focus-visible) {
+    color: var(--black);
+    transition: transform 0.2s ease;
+    transform: translateY(-4px);
+    box-shadow: 0 6px 16px hsl(0 0% 0% / 0.15);
+}
+
+.cat__content {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.cat__icon {
+    background: var(--pink);
+    padding: 0.75rem;
+    border-radius: 0.5rem;
+    display: grid;
+    place-items: center;
+}
+
+.cat__name {
+    font-size: clamp(1rem, 2vw, 1.4rem);
+    font-weight: 600;
+}
+
+.cat__card:has(.cat__name:hover) j{
+    border-color: var(--coral);
+}
+
+

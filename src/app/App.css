@@ -1,4 +1,5 @@
 :root {
+    color-schema: light dark;
     --white: hsl(0, 0%, 100%);
     --pink: hsl(350, 100%, 88%);
     --coral: hsl(327, 100%, 68%);
@@ -9,6 +10,11 @@
     --blue: hsl(221, 24%, 49%);
     --dark: hsl(233, 23%, 30%);
     --black: hsl(0, 0%, 0%);
+
+    /* Auto-switch background using light-dark() */
+    --bg: light-dark(var(--sky), hsl(233, 23%, 15%));
+    --card-bg: light-dark(var(--white), hsl(233, 23%, 22%));
+    --text: light-dark(var(--dark), var(--white));
 }
 
 *, *::before, *::after {
@@ -20,6 +26,8 @@
 body {
     background-color: var(--sky);
     font-family: "Segoe UI";
+    color: var(--text);
+    /* padding: clamp(1rem, 3vw, 2rem); */
 }
 
 

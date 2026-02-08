@@ -5,6 +5,7 @@
         "jsx": "react-jsx",
         "useDefineForClassFields": true,
         "forceConsistentCasingInFileNames": true,
+        "rootDir": "./src/",
         "outDir": "./dist/",
         "isolatedModules": true,
         "resolveJsonModule": true,

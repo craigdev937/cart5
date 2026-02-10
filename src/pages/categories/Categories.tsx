@@ -6,7 +6,8 @@ import { Package } from "lucide-react";
 import { Spinner } from "../../components/spin/Spinner";
 
 export const Categories = () => {
-    const { error, isLoading, data: categories } = DAPI.useCatQuery();
+    const { error, isLoading, 
+        data: categories } = DAPI.useCatQuery();
 
     if (error) {
         if ("status" in error) {
@@ -18,7 +19,6 @@ export const Categories = () => {
             return <h1>Error: {error.message}</h1>
         }
     };
-
 
     return (
         <React.Fragment>
